@@ -172,6 +172,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\logo.jpg" />
+    <Content Include="Content\images\logo1.jpg" />
+    <Content Include="Content\images\logo1.png" />
+    <Content Include="Content\images\logo1.tif" />
     <Content Include="Content\images\photo.jpg" />
     <Content Include="Content\meghamenu.css" />
     <Content Include="favicon.ico" />
