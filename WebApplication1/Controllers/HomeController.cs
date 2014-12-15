@@ -26,5 +26,12 @@ namespace WebApplication1.Controllers
 
             return View();
         }
+
+        public ActionResult Product()
+        {
+            ViewBag.Message = "Your product page.";
+
+            return View();
+        }
     }
 }
