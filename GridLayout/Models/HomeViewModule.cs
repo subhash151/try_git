@@ -32,10 +32,5 @@ namespace GridLayout.Models
         {
             //custom logging logic can go here
         }
-
-        public class CityModel
-        {
-            public SelectList CityListModel { get; set; }
-        }
     }
 }

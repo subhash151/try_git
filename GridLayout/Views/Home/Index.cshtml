@@ -1,4 +1,6 @@
-﻿@{
+﻿@model GridLayout.Models.adWordEntities
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -52,6 +54,14 @@
                 <div class="col-md-6">
                     <p>This is just a sample content, don't pay much attention to it. It is used just to fill space nothing more. To read about real game news try searching Google.com or your favorite gaming websites.</p>
                 </div>
+
+                <select class="selectpicker" data-style="btn-success">
+                    @foreach (var City in Model.Cities)
+                    {
+                        <option>@City.CityName</option>
+                    }
+
+                </select>
             </div>
         </div>
     </div>
