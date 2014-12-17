@@ -12,10 +12,10 @@ namespace GridLayout.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class City
+    public partial class SubCategory
     {
         public int ID { get; set; }
-        public string CityName { get; set; }
-        public int StateID { get; set; }
+        public string SubCategory1 { get; set; }
+        public string CategoryId { get; set; }
     }
 }

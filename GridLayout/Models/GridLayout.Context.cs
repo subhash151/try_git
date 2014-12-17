@@ -12,12 +12,11 @@ namespace GridLayout.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Collections.Generic;
     
-    public partial class adWordEntities : DbContext
+    public partial class adWordEntities1 : DbContext
     {
-        public adWordEntities()
-            : base("name=adWordEntities")
+        public adWordEntities1()
+            : base("name=adWordEntities1")
         {
         }
     
@@ -27,12 +26,19 @@ namespace GridLayout.Models
         }
     
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AdData> AdDatas { get; set; }
+        public virtual DbSet<AdType> AdTypes { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
-        public virtual List<City> GetCities { get; set; }
+        public virtual DbSet<Locality> Localities { get; set; }
+        public virtual DbSet<State> States { get; set; }
+        public virtual DbSet<SubCategory> SubCategories { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<UserDetail> UserDetails { get; set; }
     }
 }

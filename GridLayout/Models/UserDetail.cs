@@ -12,10 +12,13 @@ namespace GridLayout.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class City
+    public partial class UserDetail
     {
-        public int ID { get; set; }
-        public string CityName { get; set; }
-        public int StateID { get; set; }
+        public int Id { get; set; }
+        public string User_Id { get; set; }
+        public string User_Name { get; set; }
+        public string User_Address { get; set; }
+        public string User_Photo { get; set; }
+        public string Mobile { get; set; }
     }
 }

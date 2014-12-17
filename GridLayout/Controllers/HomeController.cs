@@ -9,11 +9,11 @@ namespace GridLayout.Controllers
 {
     public class HomeController : Controller
     {
-        private adWordEntities entities;
+        private adWordEntities1 entities;
 
         public HomeController()
         {
-            entities = new adWordEntities();
+            entities = new adWordEntities1();
         }
 
         public ActionResult Index()
@@ -21,6 +21,8 @@ namespace GridLayout.Controllers
             IQueryable<City> cities = entities.Cities;
             //var query = from City in entities.Cities
             //            select City;
+
+            IQueryable<Country> countries = entities.Countries;
 
             return View(cities.ToList());
         }

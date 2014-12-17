@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'J:\TestApp\AdWordGit\try_git\GridLayout\Models\adWord.edmx'. 
+﻿// T4 code generation is enabled for model 'J:\TestApp\AdWordGit\try_git\GridLayout\Models\GridLayout.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
