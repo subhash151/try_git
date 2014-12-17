@@ -29,7 +29,12 @@
                         <ul class="nav navbar-nav">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>                            
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>     
+                            <li>@Html.ActionLink("PostAd", "Index", "PostAd")</li>               
+                            <li>@Html.ActionLink("Create", "Create", "PostAd")</li>            
+                            <li>@Html.ActionLink("Edit", "Edit", "PostAd")</li>    
+                            <li>@Html.ActionLink("Delete", "Delete", "PostAd")</li>    
+                            <li>@Html.ActionLink("Details", "Details", "PostAd")</li>    
                         </ul>
                         @Html.Partial("_LoginPartial")
                         <form class="navbar-form navbar-right" role="search">
@@ -56,6 +61,11 @@
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Post Ad", "PostAd", "PostAd")</li>
+                            <li>@Html.ActionLink("Create", "Create", "PostAd")</li>
+                            <li>@Html.ActionLink("Edit", "Edit", "PostAd")</li>
+                            <li>@Html.ActionLink("Delete", "Delete", "PostAd")</li>
+                            <li>@Html.ActionLink("Details", "Details", "PostAd")</li>   
                         </ul>
                     </div>
                 </div>
