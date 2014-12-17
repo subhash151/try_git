@@ -18,10 +18,11 @@ namespace GridLayout.Controllers
 
         public ActionResult Index()
         {
-            var query = from City in entities.Cities
-                        select City;
+            IQueryable<City> cities = entities.Cities;
+            //var query = from City in entities.Cities
+            //            select City;
 
-            return View(entities);
+            return View(cities.ToList());
         }
 
         public ActionResult About()
