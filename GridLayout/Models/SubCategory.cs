@@ -15,7 +15,9 @@ namespace GridLayout.Models
     public partial class SubCategory
     {
         public int ID { get; set; }
-        public string SubCategory1 { get; set; }
-        public string CategoryId { get; set; }
+        public string SubCategoryName { get; set; }
+        public int CategoryId { get; set; }
+    
+        public virtual Category Category { get; set; }
     }
 }

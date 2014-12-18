@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="019cf377589a4d4f9d2e9f6c0f905813" Name="Diagram1">
+        <EntityTypeShape EntityType="adWordModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="adWordModel.AdData" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="adWordModel.AdType" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="adWordModel.AspNetRole" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="adWordModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="adWordModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="adWordModel.AspNetUser" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="adWordModel.Category" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="adWordModel.City" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="adWordModel.Country" Width="1.5" PointX="1.5" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="adWordModel.Locality" Width="1.5" PointX="5.25" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="adWordModel.State" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="adWordModel.SubCategory" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="adWordModel.UserDetail" Width="1.5" PointX="5.25" PointY="14.875" IsExpanded="true" />
+        <AssociationConnector Association="adWordModel.FK_AdData_AdType" ManuallyRouted="false" />
+        <AssociationConnector Association="adWordModel.FK_AdData_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="adWordModel.FK_AdData_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="adWordModel.FK_AdData_City" ManuallyRouted="false" />
+        <AssociationConnector Association="adWordModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="adWordModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="adWordModel.FK_UserDetail_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="adWordModel.FK_SubCategory_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="adWordModel.FK_City_State" ManuallyRouted="false" />
+        <AssociationConnector Association="adWordModel.FK_Locality_City" ManuallyRouted="false" />
+        <AssociationConnector Association="adWordModel.FK_State_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="adWordModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

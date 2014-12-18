@@ -16,14 +16,18 @@ namespace GridLayout.Models
     {
         public int Id { get; set; }
         public string User_Id { get; set; }
-        public string City_Id { get; set; }
-        public string Locality_Id { get; set; }
-        public string Category_Id { get; set; }
-        public string SubCategory_Id { get; set; }
-        public string AdType_Id { get; set; }
+        public int City_Id { get; set; }
+        public int Locality_Id { get; set; }
+        public int Category_Id { get; set; }
+        public int AdType_Id { get; set; }
         public string Ad_Title { get; set; }
         public string Ad_Description { get; set; }
         public string Ad_Photo { get; set; }
         public string Mobile { get; set; }
+    
+        public virtual AdType AdType { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual City City { get; set; }
     }
 }

@@ -14,8 +14,16 @@ namespace GridLayout.Models
     
     public partial class State
     {
+        public State()
+        {
+            this.Cities = new HashSet<City>();
+        }
+    
         public int ID { get; set; }
         public string StateName { get; set; }
         public int CountryID { get; set; }
+    
+        public virtual ICollection<City> Cities { get; set; }
+        public virtual Country Country { get; set; }
     }
 }

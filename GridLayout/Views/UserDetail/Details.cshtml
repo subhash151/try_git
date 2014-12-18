@@ -1,0 +1,58 @@
+﻿@model GridLayout.Models.UserDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserDetail</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Photo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Photo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mobile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

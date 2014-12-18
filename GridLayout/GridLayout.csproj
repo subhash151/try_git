@@ -161,75 +161,79 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdDataController.cs" />
+    <Compile Include="Controllers\AdTypeController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CityController.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PostAdController.cs" />
-    <Compile Include="Controllers\thisentities.cs" />
+    <Compile Include="Controllers\LocalityController.cs" />
+    <Compile Include="Controllers\StateController.cs" />
+    <Compile Include="Controllers\SubCategoryController.cs" />
+    <Compile Include="Controllers\UserDetailController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdData.cs">
-      <DependentUpon>GridLayout.tt</DependentUpon>
+      <DependentUpon>adWordDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AdType.cs">
-      <DependentUpon>GridLayout.tt</DependentUpon>
+      <DependentUpon>adWordDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\adWordDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>adWordDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\adWordDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>adWordDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\adWordDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>adWordDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>GridLayout.tt</DependentUpon>
+      <DependentUpon>adWordDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>GridLayout.tt</DependentUpon>
+      <DependentUpon>adWordDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>GridLayout.tt</DependentUpon>
+      <DependentUpon>adWordDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>GridLayout.tt</DependentUpon>
+      <DependentUpon>adWordDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
-      <DependentUpon>GridLayout.tt</DependentUpon>
+      <DependentUpon>adWordDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\City.cs">
-      <DependentUpon>GridLayout.tt</DependentUpon>
+      <DependentUpon>adWordDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Country.cs">
-      <DependentUpon>GridLayout.tt</DependentUpon>
+      <DependentUpon>adWordDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>GridLayout.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GridLayout.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GridLayout.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GridLayout.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GridLayout.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GridLayout.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GridLayout.edmx</DependentUpon>
+      <DependentUpon>adWordDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HomeViewModule.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Locality.cs">
-      <DependentUpon>GridLayout.tt</DependentUpon>
+      <DependentUpon>adWordDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\State.cs">
-      <DependentUpon>GridLayout.tt</DependentUpon>
+      <DependentUpon>adWordDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SubCategory.cs">
-      <DependentUpon>GridLayout.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>GridLayout.tt</DependentUpon>
+      <DependentUpon>adWordDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserDetail.cs">
-      <DependentUpon>GridLayout.tt</DependentUpon>
+      <DependentUpon>adWordDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -243,22 +247,22 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\GridLayout.edmx">
+    <EntityDeploy Include="Models\adWordDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GridLayout.Designer.cs</LastGenOutput>
+      <LastGenOutput>adWordDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\GridLayout.Context.tt">
+    <Content Include="Models\adWordDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GridLayout.edmx</DependentUpon>
-      <LastGenOutput>GridLayout.Context.cs</LastGenOutput>
+      <DependentUpon>adWordDB.edmx</DependentUpon>
+      <LastGenOutput>adWordDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\GridLayout.edmx.diagram">
-      <DependentUpon>GridLayout.edmx</DependentUpon>
+    <Content Include="Models\adWordDB.edmx.diagram">
+      <DependentUpon>adWordDB.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\GridLayout.tt">
+    <Content Include="Models\adWordDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GridLayout.edmx</DependentUpon>
-      <LastGenOutput>GridLayout.cs</LastGenOutput>
+      <DependentUpon>adWordDB.edmx</DependentUpon>
+      <LastGenOutput>adWordDB.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -299,11 +303,51 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\PostAd\Index.cshtml" />
-    <Content Include="Views\PostAd\Create.cshtml" />
-    <Content Include="Views\PostAd\Edit.cshtml" />
-    <Content Include="Views\PostAd\Delete.cshtml" />
-    <Content Include="Views\PostAd\Details.cshtml" />
+    <Content Include="Views\Country\Create.cshtml" />
+    <Content Include="Views\Country\Delete.cshtml" />
+    <Content Include="Views\Country\Details.cshtml" />
+    <Content Include="Views\Country\Edit.cshtml" />
+    <Content Include="Views\Country\Index.cshtml" />
+    <Content Include="Views\State\Create.cshtml" />
+    <Content Include="Views\State\Delete.cshtml" />
+    <Content Include="Views\State\Details.cshtml" />
+    <Content Include="Views\State\Edit.cshtml" />
+    <Content Include="Views\State\Index.cshtml" />
+    <Content Include="Views\City\Create.cshtml" />
+    <Content Include="Views\City\Delete.cshtml" />
+    <Content Include="Views\City\Details.cshtml" />
+    <Content Include="Views\City\Edit.cshtml" />
+    <Content Include="Views\City\Index.cshtml" />
+    <Content Include="Views\Locality\Create.cshtml" />
+    <Content Include="Views\Locality\Delete.cshtml" />
+    <Content Include="Views\Locality\Details.cshtml" />
+    <Content Include="Views\Locality\Edit.cshtml" />
+    <Content Include="Views\Locality\Index.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\SubCategory\Create.cshtml" />
+    <Content Include="Views\SubCategory\Delete.cshtml" />
+    <Content Include="Views\SubCategory\Details.cshtml" />
+    <Content Include="Views\SubCategory\Edit.cshtml" />
+    <Content Include="Views\SubCategory\Index.cshtml" />
+    <Content Include="Views\UserDetail\Create.cshtml" />
+    <Content Include="Views\UserDetail\Delete.cshtml" />
+    <Content Include="Views\UserDetail\Details.cshtml" />
+    <Content Include="Views\UserDetail\Edit.cshtml" />
+    <Content Include="Views\UserDetail\Index.cshtml" />
+    <Content Include="Views\AdType\Create.cshtml" />
+    <Content Include="Views\AdType\Delete.cshtml" />
+    <Content Include="Views\AdType\Details.cshtml" />
+    <Content Include="Views\AdType\Edit.cshtml" />
+    <Content Include="Views\AdType\Index.cshtml" />
+    <Content Include="Views\AdData\Create.cshtml" />
+    <Content Include="Views\AdData\Delete.cshtml" />
+    <Content Include="Views\AdData\Details.cshtml" />
+    <Content Include="Views\AdData\Edit.cshtml" />
+    <Content Include="Views\AdData\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,100 @@
+﻿@model GridLayout.Models.AdData
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>AdData</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.User_Id, "User_Id", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("User_Id", String.Empty)
+                @Html.ValidationMessageFor(model => model.User_Id)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.City_Id, "City_Id", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("City_Id", String.Empty)
+                @Html.ValidationMessageFor(model => model.City_Id)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Locality_Id, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Locality_Id)
+                @Html.ValidationMessageFor(model => model.Locality_Id)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Category_Id, "Category_Id", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Category_Id", String.Empty)
+                @Html.ValidationMessageFor(model => model.Category_Id)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdType_Id, "AdType_Id", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("AdType_Id", String.Empty)
+                @Html.ValidationMessageFor(model => model.AdType_Id)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ad_Title, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Ad_Title)
+                @Html.ValidationMessageFor(model => model.Ad_Title)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ad_Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Ad_Description)
+                @Html.ValidationMessageFor(model => model.Ad_Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ad_Photo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Ad_Photo)
+                @Html.ValidationMessageFor(model => model.Ad_Photo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Mobile, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Mobile)
+                @Html.ValidationMessageFor(model => model.Mobile)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

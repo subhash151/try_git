@@ -16,6 +16,8 @@ namespace GridLayout.Models
     {
         public int ID { get; set; }
         public string LocalityName { get; set; }
-        public int StateID { get; set; }
+        public int CityID { get; set; }
+    
+        public virtual City City { get; set; }
     }
 }

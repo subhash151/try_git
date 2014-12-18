@@ -9,11 +9,11 @@ namespace GridLayout.Controllers
 {
     public class HomeController : Controller
     {
-        private adWordEntities1 entities;
+        private adWordEntities entities;
 
         public HomeController()
         {
-            entities = new adWordEntities1();
+            entities = new adWordEntities();
         }
 
         public ActionResult Index()

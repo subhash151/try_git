@@ -1,0 +1,90 @@
+﻿@model GridLayout.Models.AdData
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AdData</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Locality_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Locality_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ad_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ad_Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ad_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ad_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ad_Photo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ad_Photo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mobile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdType.AdTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdType.AdTypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City.CityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City.CityName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

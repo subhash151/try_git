@@ -14,7 +14,16 @@ namespace GridLayout.Models
     
     public partial class Category
     {
+        public Category()
+        {
+            this.AdDatas = new HashSet<AdData>();
+            this.SubCategories = new HashSet<SubCategory>();
+        }
+    
         public int ID { get; set; }
         public string CategoryName { get; set; }
+    
+        public virtual ICollection<AdData> AdDatas { get; set; }
+        public virtual ICollection<SubCategory> SubCategories { get; set; }
     }
 }

@@ -14,7 +14,14 @@ namespace GridLayout.Models
     
     public partial class AdType
     {
+        public AdType()
+        {
+            this.AdDatas = new HashSet<AdData>();
+        }
+    
         public int ID { get; set; }
         public string AdTypeName { get; set; }
+    
+        public virtual ICollection<AdData> AdDatas { get; set; }
     }
 }

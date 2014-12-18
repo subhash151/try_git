@@ -16,8 +16,10 @@ namespace GridLayout.Models
     {
         public AspNetUser()
         {
+            this.AdDatas = new HashSet<AdData>();
             this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
+            this.UserDetails = new HashSet<UserDetail>();
             this.AspNetRoles = new HashSet<AspNetRole>();
         }
     
@@ -27,8 +29,10 @@ namespace GridLayout.Models
         public string SecurityStamp { get; set; }
         public string Discriminator { get; set; }
     
+        public virtual ICollection<AdData> AdDatas { get; set; }
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual ICollection<UserDetail> UserDetails { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }
 }

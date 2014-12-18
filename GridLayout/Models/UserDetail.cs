@@ -20,5 +20,7 @@ namespace GridLayout.Models
         public string User_Address { get; set; }
         public string User_Photo { get; set; }
         public string Mobile { get; set; }
+    
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }
