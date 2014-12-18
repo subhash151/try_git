@@ -22,8 +22,6 @@ namespace GridLayout.Controllers
             //var query = from City in entities.Cities
             //            select City;
 
-            IQueryable<Country> countries = entities.Countries;
-
             return View(cities.ToList());
         }
 

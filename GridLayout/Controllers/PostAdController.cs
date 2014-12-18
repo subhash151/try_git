@@ -3,16 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GridLayout.Models;
 
 namespace GridLayout.Controllers
 {
     public class PostAdController : Controller
     {
+
+        adWordEntities1 entities;
+
+        public PostAdController()
+        {
+            entities = new adWordEntities1();
+        }
+
         //
         // GET: /PostAd/
         public ActionResult Index()
         {
-            return View();
+            IQueryable<AdData> adDetails = entities.AdDatas;
+
+            return View(adDetails);
         }
 
         //
