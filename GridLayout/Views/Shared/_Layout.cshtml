@@ -21,33 +21,44 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Game Site</a>
+                        <a class="navbar-brand" href="#">
+                            <img src="~/Content/Images/logo1.jpg" alt="indogis">
+                            @*<img src="~/Content/Images/logo1.jpg" />*@
+                        </a>
+
                     </div>
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
                         <ul class="nav navbar-nav">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>     
-                            <li>@Html.ActionLink("Post Ad", "Index", "AdData")</li>               
-                            <li>@Html.ActionLink("Country", "Index", "Country")</li>
+                            @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>     
+                            <li>@Html.ActionLink("Post Ad", "Index", "AdData")</li>*@               
+                            @*<li>@Html.ActionLink("Country", "Index", "Country")</li>
                             <li>@Html.ActionLink("City", "Index", "City")</li>
-                            <li>@Html.ActionLink("Category", "Index", "Category")</li>
-                            <li>@Html.ActionLink("Locality", "Index", "Locality")</li>
+                            <li>@Html.ActionLink("Category", "Index", "Category")</li>*@
+                            @*<li>@Html.ActionLink("Locality", "Index", "Locality")</li>
                             <li>@Html.ActionLink("Ad Type", "Index", "AdType")</li>
-                            <li>@Html.ActionLink("Ad Type", "Index", "AdType")</li>
+                            <li>@Html.ActionLink("Ad Type", "Index", "AdType")</li>*@
                         </ul>
                         @Html.Partial("_LoginPartial")
-                        <form class="navbar-form navbar-right" role="search">
+                        @*<form class="navbar-form navbar-right" role="search">
                             <div class="form-group">
                                 <input class="form-control" placeholder="Search" type="text">
                             </div>
                             <button type="submit" class="btn btn-primary">Search</button>
-                        </form>
-                       
+                        </form>*@
                     </div>
-                </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input class="form-control" placeholder="Search" type="text">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+                        </div>
+                    </div>
             </nav>
 
             @RenderBody()
