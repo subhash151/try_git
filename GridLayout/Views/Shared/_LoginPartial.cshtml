@@ -1,4 +1,13 @@
 ﻿@using Microsoft.AspNet.Identity
+
+<ul class="nav navbar-btn  navbar-right">
+    <li>
+        <button id="postAd" class="btn btn-success btn-sm" type="button" aria-expanded="false">
+            Post Free Ad <span class=""></span>
+        </button>
+    </li>
+</ul>
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))

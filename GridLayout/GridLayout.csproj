@@ -39,6 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HotGlue.Core">
+      <HintPath>..\packages\HotGlue.Core.0.5.58.0\lib\net40\HotGlue.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="HotGlue.Template.JsRender">
+      <HintPath>..\packages\HotGlue.Template.JsRender.0.5.58.0\lib\net40\HotGlue.Template.JsRender.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -168,6 +174,7 @@
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalityController.cs" />
+    <Compile Include="Controllers\PostAdController.cs" />
     <Compile Include="Controllers\StateController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
     <Compile Include="Controllers\UserDetailController.cs" />
@@ -241,10 +248,11 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\Ad\2.jpg" />
     <Content Include="Content\Images\indlg.png" />
+    <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\logo1.jpg" />
     <Content Include="Content\Images\logo1.png" />
-    <Content Include="Content\Images\logo1.tif" />
     <Content Include="Content\Images\logo2.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -270,9 +278,12 @@
       <LastGenOutput>adWordDB.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Home\home.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jQuery.tmpl.js" />
+    <Content Include="Scripts\jQuery.tmpl.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -280,6 +291,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Shared\shared.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -353,6 +365,11 @@
     <Content Include="Views\AdData\Details.cshtml" />
     <Content Include="Views\AdData\Edit.cshtml" />
     <Content Include="Views\AdData\Index.cshtml" />
+    <Content Include="Views\PostAd\Create.cshtml" />
+    <Content Include="Views\PostAd\Delete.cshtml" />
+    <Content Include="Views\PostAd\Details.cshtml" />
+    <Content Include="Views\PostAd\Edit.cshtml" />
+    <Content Include="Views\PostAd\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

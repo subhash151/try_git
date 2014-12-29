@@ -1,79 +1,49 @@
-﻿@model IEnumerable<GridLayout.Models.City>
+﻿@model IEnumerable<GridLayout.Models.AdData>
 
 @{
     ViewBag.Title = "Home Page";
 }
 
-<div class="row">
+<script src="~/Scripts/jQuery.tmpl.min.js"></script>
+<script src="~/Scripts/jQuery.tmpl.js"></script>
+<script src="~/Scripts/jsrender.js"></script>
 
-    <div class="col-md-3">
-        <a href="#" class="thumbnail">
-            @*<img src="img/game-site-1.jpg" alt="Image">*@
-            <img src="http://placehold.it/300x300&amp;text=Image 1" alt="...">
-        </a>
-        <div class="panel-footer text-center">Chess</div>
-    </div>
-
-    <div class="col-md-3">
-        <a href="#" class="thumbnail">
-            @*<img src="img/game-site-2.jpg" alt="Image">*@
-            <img src="http://placehold.it/300x300&amp;text=Image 2" alt="...">
-        </a>
-        <div class="panel-footer text-center">Blob Bob</div>
-    </div>
-
-    <div class="col-md-3">
-        <a href="#" class="thumbnail">
-            @*<img src="img/game-site-3.jpg" alt="Image">*@
-            <img src="http://placehold.it/300x300&amp;text=Image 3" alt="...">
-        </a>
-        <div class="panel-footer text-center">Alien Showdown</div>
-    </div>
-
-    <div class="col-md-3">
-        <a href="#" class="thumbnail">
-            @*<img src="img/game-site-4.jpg" alt="Image">*@
-            <img src="http://placehold.it/300x300&amp;text=Image 4" alt="...">
-        </a>
-        <div class="panel-footer text-center">Matrix</div>
-    </div>
-</div>
-
-<br />
-<br />
-
-<div class="row">
+<div id="popularCities" class="row">
+    <br />
     <div class="col-md-8">
-        <div class="panel-footer">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2>Games News</h2>
-                    <hr>
-                    <p><b>Games of the Future will have 32 Bits.</b></p>
-                </div>
-                <div class="col-md-6">
-                    <p>This is just a sample content, don't pay much attention to it. It is used just to fill space nothing more. To read about real game news try searching Google.com or your favorite gaming websites.</p>
-                </div>
-
-                <select class="selectpicker" data-style="btn-success">
-                    @foreach (var City in Model)
-                    {
-                        <option>@City.CityName</option>
-                    }
-
-                </select>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Popular Cities
+                </h3>
+            </div>
+            <div class="panel-body">
+                <ul id="lstCity" class="nav nav-pills pull-left"></ul>
             </div>
         </div>
     </div>
 
     <div class="col-md-4">
-        <h2>Get In Touch!</h2>
+        <h2>Post Free Ad</h2>
         <hr>
         <button type="button" class="btn btn-primary text-center" style="width:100%;">Call to Action!</button>
     </div>
 </div>
 
-<hr />
+<div id="adCategories" class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Free Classfied Ad Categories in India
+                </h3>
+            </div>
+            <div class="panel-body">
+                <ul id="lstCategories" class="nav nav-pills pull-left"></ul>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-sm-6 col-md-4">
@@ -88,30 +58,31 @@
     </div>
 
     <div class="col-sm-6 col-md-8">
+        <h4>Latest Ads</h4>
 
-        <div class="row">
+        <div id="latestAdContainer" class="row">
             <div class="col-md-4">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/300x300&amp;text=Game 1" alt="...">
+                <div id="top1" class="thumbnail">
+                    <img src="~/Content/Images/Ad/1.jpg" alt="...">
                     <div class="panel-footer text-center">
-                        <p>Game 1</p>
-                        <p>$50.00</p>
+                        <h4 id="htop1">Car on sale</h4>
+                        <p id="dtop1">old car with good condition on sale</p>
+                        <span id="ptop1" class="label label-warning">INR 50000</span>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/300x300&amp;text=Game 2" alt="...">
+                <div id="top2" class="thumbnail">
+                    <img src="~/Content/Images/Ad/2.jpg" alt="...">
                     <div class="panel-footer text-center">
                         <p>Game 2</p>
                         <p>$47.00</p>
                     </div>
                 </div>
             </div>
-
             <div class="col-md-4">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/300x300&amp;text=Game 3" alt="...">
+                <div id="top3" class="thumbnail">
+                    <img src="~/Content/Images/Ad/3.jpg" alt="...">
                     <div class="panel-footer text-center">
                         <p>Game 3</p>
                         <p>$34.00</p>
@@ -119,38 +90,32 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
+</br>
+
+<div class="row">
+    <div class="col-sm-6 col-md-4">
+        ADVERTISEMENT
+    </div>
+
+    <div class="col-sm-6 col-md-8">
         <div class="row">
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/300x300&amp;text=Game 4" alt="...">
-                    <div class="panel-footer text-center">
-                        <p>Game 4</p>
-                        <p>$47.00</p>
+            @foreach (var ad in Model)
+            {
+                <div class="panel-footer top-left">
+                <div class="col-md-3">
+                    <div class="thumbnail">
+                        <img src=@ad.Ad_Photo alt="...">
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/300x300&amp;text=Game 5" alt="...">
-                    <div class="panel-footer text-center">
-                        <p>Game 5</p>
-                        <p>$26.00</p>
-                    </div>
-                </div>
+                <h3>@ad.Ad_Title</h3>
+                <p>@ad.Ad_Description</p>
             </div>
+            }
 
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/300x300&amp;text=Game 6" alt="...">
-                    <div class="panel-footer text-center">
-                        <p>Game 6</p>
-                        <p>$16.00</p>
-                    </div>
-                </div>
-            </div>
         </div>
-
     </div>
 </div>

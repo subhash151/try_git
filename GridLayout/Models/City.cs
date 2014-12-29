@@ -14,12 +14,6 @@ namespace GridLayout.Models
     
     public partial class City
     {
-        public City()
-        {
-            this.AdDatas = new HashSet<AdData>();
-            this.Localities = new HashSet<Locality>();
-        }
-    
         public int ID { get; set; }
         public string CityName { get; set; }
         public int StateID { get; set; }

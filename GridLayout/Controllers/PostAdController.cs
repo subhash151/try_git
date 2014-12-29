@@ -10,18 +10,18 @@ using GridLayout.Models;
 
 namespace GridLayout.Controllers
 {
-    public class AdDataController : Controller
+    public class PostAdController : Controller
     {
         private adWordEntities db = new adWordEntities();
 
-        // GET: /AdData/
+        // GET: /PostAd/
         public ActionResult Index()
         {
             var addatas = db.AdDatas.Include(a => a.AdType).Include(a => a.AspNetUser).Include(a => a.Category).Include(a => a.City);
             return View(addatas.ToList());
         }
 
-        // GET: /AdData/Details/5
+        // GET: /PostAd/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,7 +36,7 @@ namespace GridLayout.Controllers
             return View(addata);
         }
 
-        // GET: /AdData/Create
+        // GET: /PostAd/Create
         public ActionResult Create()
         {
             ViewBag.AdType_Id = new SelectList(db.AdTypes, "ID", "AdTypeName");
@@ -46,12 +46,12 @@ namespace GridLayout.Controllers
             return View();
         }
 
-        // POST: /AdData/Create
+        // POST: /PostAd/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,User_Id,City_Id,Category_Id,AdType_Id,Ad_Title,Ad_Description,Ad_Photo,Mobile")] AdData addata)
+        public ActionResult Create([Bind(Include="Id,User_Id,City_Id,Locality_Id,Category_Id,AdType_Id,Ad_Title,Ad_Description,Ad_Photo,Mobile")] AdData addata)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace GridLayout.Controllers
             return View(addata);
         }
 
-        // GET: /AdData/Edit/5
+        // GET: /PostAd/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,7 +86,7 @@ namespace GridLayout.Controllers
             return View(addata);
         }
 
-        // POST: /AdData/Edit/5
+        // POST: /PostAd/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -106,7 +106,7 @@ namespace GridLayout.Controllers
             return View(addata);
         }
 
-        // GET: /AdData/Delete/5
+        // GET: /PostAd/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -121,7 +121,7 @@ namespace GridLayout.Controllers
             return View(addata);
         }
 
-        // POST: /AdData/Delete/5
+        // POST: /PostAd/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
