@@ -12,12 +12,29 @@
         return false;
     });
 
-    
-    //create top three template
-    var markup = "<h4>${Ad_Title}</h4>";
-    $.template("tmplTopThree", markup);
-    
-    alert("ALL DONE");
+    $("#lstCategories").on('click', 'li', function () {
+        var catVal = ($(this).attr("value"));
+        alert(catVal);
+        $('#ddlCategory').val(catVal);
+        $("#adCategories").hide();
+    });
+
+    $("#lstCity").on('click', 'li', function () {
+        var cityVal = ($(this).attr("value"));
+        alert(cityVal);
+        $('#ddlCity').val(cityVal);
+        $("#popularCities").hide();
+    });
+
+    $("#ddlCategory").change(function () {
+        var option = $(this).find('option:selected');
+        alert($(option).attr("value"));
+    });
+
+    $("#ddlCity").change(function () {
+        var option = $(this).find('option:selected');
+        alert($(option).attr("value"));
+    });
 });
 
 function fillCityCombo() {
@@ -32,7 +49,8 @@ function fillCityCombo() {
                     text: item.CityName
                 }));
                 //collecting cities for list view
-                items.push('<li><a href="#">' + item.CityName + '</a></li>');
+                items.push('<li value='+ item.ID + '><a href="#">' + item.CityName + '</a></li>');
+                //items.push('<li value=' + item.ID + '>' + item.CityName + '</li>');
             });
             //populating list of cities.
             $('#lstCity').append(items);
@@ -52,7 +70,7 @@ function fillCategoryCombo() {
                     text: item.CategoryName
                 }));
                 //collecting categories for list view
-                items.push('<li><a href="#">' + item.CategoryName + '</a></li>');
+                items.push('<li value='+ item.ID + '><a href="#">' + item.CategoryName + '</a></li>');
             });
             //populating list of cities.
             $('#lstCategories').append(items);
@@ -77,5 +95,30 @@ function fillAdData() {
         });
     //};
 };
+
+
+
+$(function () {
+    var selection;
+    $(".nav nav-pills pull-left").lstCategories({
+
+        select: function (event, ui) {
+
+            $('.selected', this).removeClass('selected');
+
+            // add the css class as well as get the text value of the selection
+
+            selection = ui.item.addClass('selected').text();
+
+        } // closes select function
+
+    });
+
+    $((".nav nav-pills pull-left").lstCategories).on('click', function () {
+
+        alert(selection);
+
+    }); //closes click()
+});
 
 

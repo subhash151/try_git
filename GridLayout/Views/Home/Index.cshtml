@@ -61,34 +61,49 @@
         <h4>Latest Ads</h4>
 
         <div id="latestAdContainer" class="row">
-            <div class="col-md-4">
-                <div id="top1" class="thumbnail">
-                    <img src="~/Content/Images/Ad/1.jpg" alt="...">
-                    <div class="panel-footer text-center">
-                        <h4 id="htop1">Car on sale</h4>
-                        <p id="dtop1">old car with good condition on sale</p>
-                        <span id="ptop1" class="label label-warning">INR 50000</span>
+            @for(int i = 0; i < 3; i++)
+            {
+                var item = Model.ToList()[i];
+                 <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src=@item.Ad_Photo alt="...">
+                        <div class="panel-footer text-center">
+                            <h4>@item.Ad_Title</h4>
+                            <p>@item.Ad_Description</p>
+                            <span class="label label-warning">INR 50000</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div id="top2" class="thumbnail">
-                    <img src="~/Content/Images/Ad/2.jpg" alt="...">
-                    <div class="panel-footer text-center">
-                        <p>Game 2</p>
-                        <p>$47.00</p>
+            }
+
+            @*<div class="col-md-4">
+                    <div id="top1" class="thumbnail">
+                        <img src="~/Content/Images/Ad/1.jpg" alt="...">
+                        <div class="panel-footer text-center">
+                            <h4 id="htop1">Car on sale</h4>
+                            <p id="dtop1">old car with good condition on sale</p>
+                            <span id="ptop1" class="label label-warning">INR 50000</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div id="top3" class="thumbnail">
-                    <img src="~/Content/Images/Ad/3.jpg" alt="...">
-                    <div class="panel-footer text-center">
-                        <p>Game 3</p>
-                        <p>$34.00</p>
+                <div class="col-md-4">
+                    <div id="top2" class="thumbnail">
+                        <img src="~/Content/Images/Ad/2.jpg" alt="...">
+                        <div class="panel-footer text-center">
+                            <p>Game 2</p>
+                            <p>$47.00</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="col-md-4">
+                    <div id="top3" class="thumbnail">
+                        <img src="~/Content/Images/Ad/3.jpg" alt="...">
+                        <div class="panel-footer text-center">
+                            <p>Game 3</p>
+                            <p>$34.00</p>
+                        </div>
+                    </div>
+                </div>*@
         </div>
     </div>
 </div>
@@ -97,25 +112,66 @@
 
 <div class="row">
     <div class="col-sm-6 col-md-4">
-        ADVERTISEMENT
+        <div class="row">
+            <div class="text-center">
+                <img src="http://placehold.it/300x300&amp;text=Image 1" alt="...">
+            </div>
+        </div>
+        </br>
+        <div class="row">
+            <div class="text-center">
+                <img src="http://placehold.it/300x300&amp;text=Image 1" alt="...">
+            </div>
+        </div>
     </div>
 
     <div class="col-sm-6 col-md-8">
         <div class="row">
+            @*<a target="_blank" href="http://r.turn.com/r/click?id=RaJgTrnUpW62eQgA3AcBAA&amp;url=http%3A%2F%2Fresults.affilitrace.com%2Flstrackn%2F2821&amp;invsrc=32&amp;tld=placehold.it"><img src="http://img.turn.com/img-data/5ea95b90e196446c9cb5577c212f2c1b_1/7c0349aac08a412ba0d74ecc52114b6d.jpg" border="0"></a>*@
+            <img src="http://placehold.it/690x100&amp;text=Image 1" alt="...">
+        </div>
+
+        <br>
+        <div class="row">
             @foreach (var ad in Model)
             {
                 <div class="panel-footer top-left">
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <img src=@ad.Ad_Photo alt="...">
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img src=@ad.Ad_Photo alt="...">
+                        </div>
                     </div>
-                </div>
 
-                <h3>@ad.Ad_Title</h3>
-                <p>@ad.Ad_Description</p>
-            </div>
+                    <h3>@ad.Ad_Title</h3>
+                    <p>@ad.Ad_Description</p>
+                </div>
+                <br />
             }
 
+            <span class="glyphicons glyphicons-home">hello subhash</span>
+        </div>
+
+        <div class="row text-center">
+
+            <nav>
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="disabled"><a href="#">1</a></li>
+                    <li class="active"><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>
