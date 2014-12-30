@@ -23,7 +23,7 @@ namespace GridLayout.Controllers
             entities = new adWordEntities();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int? cityId, int? catId, string search=null)
         {
             IQueryable<AdData> adDetails = entities.AdDatas;
             return View(adDetails.ToList());

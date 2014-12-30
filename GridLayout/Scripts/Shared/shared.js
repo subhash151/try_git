@@ -14,34 +14,63 @@
 
     $("#lstCategories").on('click', 'li', function () {
         var catVal = ($(this).attr("value"));
-        alert(catVal);
+        //alert(catVal);
         $('#ddlCategory').val(catVal);
+        fethData();
         $("#adCategories").hide();
     });
 
     $("#lstCity").on('click', 'li', function () {
         var cityVal = ($(this).attr("value"));
-        alert(cityVal);
+        //alert(cityVal);
         $('#ddlCity').val(cityVal);
+        fethData();
         $("#popularCities").hide();
     });
 
     $("#ddlCategory").change(function () {
         var option = $(this).find('option:selected');
-        alert($(option).attr("value"));
+        //alert($(option).attr("value"));
+        fethData();
     });
 
     $("#ddlCity").change(function () {
         var option = $(this).find('option:selected');
-        alert($(option).attr("value"));
+        //alert($(option).attr("value"));
+        fethData();
     });
+
+    $("#btnSearch").button().click(function () {
+        fethData();
+    });
+
 });
+
+$("#ulPagination").click(function () {
+    alert("here");
+    //var pgVal = ($(this).attr("value"));
+    //alert(pgVal);
+    //$('#ddlCity').val(cityVal);
+    //fethData();
+    //$("#popularCities").hide();
+});
+
+function fethData()
+{
+    var valCat = $('#ddlCategory').val();
+    var valCity = $('#ddlCity').val();
+    var search = $('#txtSearch').val();
+    window.location.href = "/Home?cityId=" + valCity + "&catId=" + valCat + "&search=" + search;
+    //alert("hello :" + valCat);
+    return false;
+};
 
 function fillCityCombo() {
     if (!$('#ddlCity').val()) {
         $.get("/Home/GetCity", function (data) {
             $("#ddlCity").empty();
             //array to collect cities.
+            $('#ddlCity').append('<option value="0">All</option>');
             var items = [];
             $.each(data, function (index, item) {
                 $('#ddlCity').append($('<option>', {
@@ -63,6 +92,7 @@ function fillCategoryCombo() {
         $.get("/Home/GetCategory", function (data) {
             $("#ddlCategory").empty();
             //array to collect categories.
+            $('#ddlCategory').append('<option value="0">All</option>');
             var items = [];
             $.each(data, function (index, item) {
                 $('#ddlCategory').append($('<option>', {
@@ -86,12 +116,6 @@ function fillAdData() {
             $.each(data, function (index, item) {
                 items.push('<li><a href="#">' + item.Ad_Title + '</a></li>');
             });
-
-            //alert(JSON.stringify(data));
-            //alert(JSON.stringify(items));
-
-            //$('#latestAdContainer').append(items);
-            //$.tmpl("tmplTopThree", items).appendTo("#latestAdContainer");
         });
     //};
 };
@@ -101,23 +125,16 @@ function fillAdData() {
 $(function () {
     var selection;
     $(".nav nav-pills pull-left").lstCategories({
-
         select: function (event, ui) {
-
             $('.selected', this).removeClass('selected');
-
             // add the css class as well as get the text value of the selection
-
             selection = ui.item.addClass('selected').text();
-
         } // closes select function
 
     });
 
     $((".nav nav-pills pull-left").lstCategories).on('click', function () {
-
         alert(selection);
-
     }); //closes click()
 });
 
