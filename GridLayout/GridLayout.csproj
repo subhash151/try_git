@@ -370,6 +370,7 @@
     <Content Include="Views\PostAd\Details.cshtml" />
     <Content Include="Views\PostAd\Edit.cshtml" />
     <Content Include="Views\PostAd\Index.cshtml" />
+    <Content Include="Views\Home\_LoadDataPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

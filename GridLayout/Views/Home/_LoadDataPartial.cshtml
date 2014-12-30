@@ -1,0 +1,21 @@
+﻿@model IEnumerable<GridLayout.Models.AdData>
+@*@if (Model.Count > 0)
+{
+    }*@
+
+@foreach (var ad in Model)
+{
+    <div class="panel-footer top-left">
+        <div class="col-md-3">
+            <div class="thumbnail">
+                <img src=@ad.Ad_Photo alt="...">
+            </div>
+        </div>
+
+        <h3>@ad.Ad_Title</h3>
+        <p>@ad.Ad_Description</p>
+    </div>
+    <br />
+}
+
+<div>subhash this is patial view</div>

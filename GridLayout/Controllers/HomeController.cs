@@ -29,6 +29,11 @@ namespace GridLayout.Controllers
             return View(adDetails.ToList());
         }
 
+        public void fetchData(int? cityId, int? catId, string search = null)
+        { 
+            
+        }
+
         public JsonResult GetCity()
         {
             List<City> cities = new List<City>();

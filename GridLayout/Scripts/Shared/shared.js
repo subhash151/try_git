@@ -5,7 +5,7 @@
     $("#txtSearch").width("300");
     fillCityCombo();
     fillCategoryCombo();
-    fillAdData();
+    //fillAdData();
 
     $('#postAd').click(function () {
         window.location.href = "/AdData/Create";
@@ -44,15 +44,14 @@
         fethData();
     });
 
+    //load partial view for ad data
+    $('#adData').load('/_LoadDataPartial.cshtml');
+
+    alert("yes loading");
+    //fethData();
 });
 
 $("#ulPagination").click(function () {
-    alert("here");
-    //var pgVal = ($(this).attr("value"));
-    //alert(pgVal);
-    //$('#ddlCity').val(cityVal);
-    //fethData();
-    //$("#popularCities").hide();
 });
 
 function fethData()
@@ -60,8 +59,23 @@ function fethData()
     var valCat = $('#ddlCategory').val();
     var valCity = $('#ddlCity').val();
     var search = $('#txtSearch').val();
-    window.location.href = "/Home?cityId=" + valCity + "&catId=" + valCat + "&search=" + search;
-    //alert("hello :" + valCat);
+    //window.location.href = "/Home?cityId=" + valCity + "&catId=" + valCat + "&search=" + search;
+    alert("cat :" + valCat + "cty :" + valCity + "search:" + search);
+
+    //$.get("/Home/fetchData", function (valCat, valCity, search) {
+    //});
+
+    $.ajax({
+        url: "/Home/fetchData?cityId=" + valCity + "&catId=" +  valCat + "&search=" +search,
+        type: "GET",
+        dataType: 'json',
+        success: function (response) {
+            vm.Requests(ko.utils.unwrapObservable(ko.mapping.fromJS(response)));
+        }
+    });
+    
+    $('#adData').load('/_LoadDataPartial.cshtml');
+
     return false;
 };
 
@@ -108,19 +122,17 @@ function fillCategoryCombo() {
     };
 };
 
-function fillAdData() {
-    //if (!$('#lstAdData').val()) {
-        $.get("/Home/GetAdData", function (data) {
-            //$("#lstAdData").empty();
-            var items = [];
-            $.each(data, function (index, item) {
-                items.push('<li><a href="#">' + item.Ad_Title + '</a></li>');
-            });
-        });
-    //};
-};
-
-
+//function fillAdData() {
+//    //if (!$('#lstAdData').val()) {
+//        $.get("/Home/GetAdData", function (data) {
+//            //$("#lstAdData").empty();
+//            var items = [];
+//            $.each(data, function (index, item) {
+//                items.push('<li><a href="#">' + item.Ad_Title + '</a></li>');
+//            });
+//        });
+//    //};
+//};
 
 $(function () {
     var selection;
