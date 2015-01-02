@@ -1,11 +1,9 @@
 ﻿@model IEnumerable<GridLayout.Models.AdData>
-@*@if (Model.Count > 0)
-{
-    }*@
 
 @foreach (var ad in Model)
 {
-    <div class="panel-footer top-left">
+    //<div class="panel-footer top-left">
+    @*<div class="panel panel-group">
         <div class="col-md-3">
             <div class="thumbnail">
                 <img src=@ad.Ad_Photo alt="...">
@@ -14,8 +12,21 @@
 
         <h3>@ad.Ad_Title</h3>
         <p>@ad.Ad_Description</p>
-    </div>
+    </div>*@
+
+    <div class="thumbnail">
+            <div class="media">
+                <a href="#" class="pull-left"> <img src=@ad.Ad_Photo alt='' width="150" height="110" class="media-object" /></a>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        @ad.Ad_Title
+                    </h4>
+                    <h5>posted on 00/00/2014 by Subhash</h5>
+                    @ad.Ad_Description
+                </div>
+            </div>
+        </div>
+
+    
     <br />
 }
-
-<div>subhash this is patial view</div>

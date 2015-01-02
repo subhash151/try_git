@@ -29,9 +29,35 @@ namespace GridLayout.Controllers
             return View(adDetails.ToList());
         }
 
-        public void fetchData(int? cityId, int? catId, string search = null)
-        { 
-            
+        public ActionResult fetchData(int? cityId, int? catId, string search = null)
+        {
+            IQueryable<AdData> adDetails = null;
+            //if (cityId != null || catId != null || search != null)
+            //{
+            //    adDetails = entities.AdDatas;
+            //}
+            //else
+            //{
+            //    var query = "";
+            //    if (cityId != null)
+            //    {
+            //        query = query + "adData.City_Id ==" + cityId + "&&";
+            //    }
+            //    else if (catId != null)
+            //    {
+            //        query = query + "adData.Category_Id ==" + cityId + "&&";
+            //    }
+            //    else if (search != null)
+            //    {
+            //        query = query + "adData.Ad_Descriptio.Contains(" + search + ")";
+            //    }
+            //}
+
+            adDetails = from adData in entities.AdDatas
+                        where (cityId != null ? adData.City_Id == cityId : (catId != null ? adData.Category_Id == catId : adData.Ad_Description.Contains(search)))
+                        select adData;  
+
+            return PartialView("../Home/_LoadDataPartial", adDetails.ToList());
         }
 
         public JsonResult GetCity()

@@ -16,7 +16,7 @@
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.User_Id, "User_Id", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.User_Id, "User Name", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("User_Id", String.Empty)
                 @Html.ValidationMessageFor(model => model.User_Id)
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.City_Id, "City_Id", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.City_Id, "City", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("City_Id", String.Empty)
                 @Html.ValidationMessageFor(model => model.City_Id)
@@ -40,7 +40,7 @@
         </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Category_Id, "Category_Id", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Category_Id, "Category", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("Category_Id", String.Empty)
                 @Html.ValidationMessageFor(model => model.Category_Id)
@@ -48,7 +48,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AdType_Id, "AdType_Id", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AdType_Id, "Ad Type", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("AdType_Id", String.Empty)
                 @Html.ValidationMessageFor(model => model.AdType_Id)
@@ -56,40 +56,39 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Ad_Title, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Ad_Title, "Ad Title", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ad_Title)
+                @Html.TextBoxFor(model => model.Ad_Title, new { @class="form-control"})
                 @Html.ValidationMessageFor(model => model.Ad_Title)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Ad_Description, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Ad_Description, "Ad Description", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ad_Description)
+                @Html.TextAreaFor(model => model.Ad_Description, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Ad_Description)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Ad_Photo, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Ad_Photo, "Ad Image", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ad_Photo)
-                @*@Html.ValidationMessageFor(model => model.Ad_Photo)*@
+                @Html.TextBoxFor(model => model.Ad_Photo, new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Mobile, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Mobile, "Mobile", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Mobile)
+                @Html.TextBoxFor(model => model.Mobile, new { @class="form-control"})
                 @Html.ValidationMessageFor(model => model.Mobile)
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </div>
     </div>

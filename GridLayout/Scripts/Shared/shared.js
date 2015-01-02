@@ -1,11 +1,10 @@
 ﻿$(document).ready(function () {
     debugger;
-    $("#ddlCity").width("200");
-    $("#ddlCategory").width("200");
-    $("#txtSearch").width("300");
+    //$("#ddlCity").width("200");
+    //$("#ddlCategory").width("200");
+    //$("#txtSearch").width("300");
     fillCityCombo();
     fillCategoryCombo();
-    //fillAdData();
 
     $('#postAd').click(function () {
         window.location.href = "/AdData/Create";
@@ -14,7 +13,6 @@
 
     $("#lstCategories").on('click', 'li', function () {
         var catVal = ($(this).attr("value"));
-        //alert(catVal);
         $('#ddlCategory').val(catVal);
         fethData();
         $("#adCategories").hide();
@@ -22,21 +20,16 @@
 
     $("#lstCity").on('click', 'li', function () {
         var cityVal = ($(this).attr("value"));
-        //alert(cityVal);
         $('#ddlCity').val(cityVal);
         fethData();
         $("#popularCities").hide();
     });
 
     $("#ddlCategory").change(function () {
-        var option = $(this).find('option:selected');
-        //alert($(option).attr("value"));
         fethData();
     });
 
     $("#ddlCity").change(function () {
-        var option = $(this).find('option:selected');
-        //alert($(option).attr("value"));
         fethData();
     });
 
@@ -44,11 +37,8 @@
         fethData();
     });
 
-    //load partial view for ad data
-    $('#adData').load('/_LoadDataPartial.cshtml');
-
-    alert("yes loading");
-    //fethData();
+    //alert("yes loading");
+    fethData();
 });
 
 $("#ulPagination").click(function () {
@@ -59,22 +49,12 @@ function fethData()
     var valCat = $('#ddlCategory').val();
     var valCity = $('#ddlCity').val();
     var search = $('#txtSearch').val();
-    //window.location.href = "/Home?cityId=" + valCity + "&catId=" + valCat + "&search=" + search;
-    alert("cat :" + valCat + "cty :" + valCity + "search:" + search);
+   // alert("cat :" + valCat + "cty :" + valCity + "search:" + search);
 
-    //$.get("/Home/fetchData", function (valCat, valCity, search) {
-    //});
-
-    $.ajax({
-        url: "/Home/fetchData?cityId=" + valCity + "&catId=" +  valCat + "&search=" +search,
-        type: "GET",
-        dataType: 'json',
-        success: function (response) {
-            vm.Requests(ko.utils.unwrapObservable(ko.mapping.fromJS(response)));
-        }
+    $("#adData").empty();
+    $.get("/Home/fetchData?cityId=" + valCity + "&catId=" +  valCat + "&search=" +search, function (data) {
+        $("#adData").append(data);
     });
-    
-    $('#adData').load('/_LoadDataPartial.cshtml');
 
     return false;
 };
@@ -122,32 +102,20 @@ function fillCategoryCombo() {
     };
 };
 
-//function fillAdData() {
-//    //if (!$('#lstAdData').val()) {
-//        $.get("/Home/GetAdData", function (data) {
-//            //$("#lstAdData").empty();
-//            var items = [];
-//            $.each(data, function (index, item) {
-//                items.push('<li><a href="#">' + item.Ad_Title + '</a></li>');
-//            });
-//        });
-//    //};
-//};
+//$(function () {
+//    var selection;
+//    $(".nav nav-pills pull-left").lstCategories({
+//        select: function (event, ui) {
+//            $('.selected', this).removeClass('selected');
+//            // add the css class as well as get the text value of the selection
+//            selection = ui.item.addClass('selected').text();
+//        } // closes select function
 
-$(function () {
-    var selection;
-    $(".nav nav-pills pull-left").lstCategories({
-        select: function (event, ui) {
-            $('.selected', this).removeClass('selected');
-            // add the css class as well as get the text value of the selection
-            selection = ui.item.addClass('selected').text();
-        } // closes select function
+//    });
 
-    });
-
-    $((".nav nav-pills pull-left").lstCategories).on('click', function () {
-        alert(selection);
-    }); //closes click()
-});
+//    $((".nav nav-pills pull-left").lstCategories).on('click', function () {
+//        alert(selection);
+//    }); //closes click()
+//});
 
 
