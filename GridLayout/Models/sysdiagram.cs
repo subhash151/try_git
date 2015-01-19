@@ -12,20 +12,12 @@ namespace GridLayout.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class City
+    public partial class sysdiagram
     {
-        public City()
-        {
-            this.AdDatas = new HashSet<AdData>();
-            this.Localities = new HashSet<Locality>();
-        }
-    
-        public int ID { get; set; }
-        public string CityName { get; set; }
-        public int StateID { get; set; }
-    
-        public virtual ICollection<AdData> AdDatas { get; set; }
-        public virtual State State { get; set; }
-        public virtual ICollection<Locality> Localities { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

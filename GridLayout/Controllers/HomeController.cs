@@ -17,47 +17,83 @@ namespace GridLayout.Controllers
         private adWordEntities entities;
 
         private adWordEntities db = new adWordEntities();
+        //private DbSet<AdData> query;
 
         public HomeController()
         {
             entities = new adWordEntities();
         }
 
-        public ActionResult Index(int? cityId, int? catId, string search=null)
+        public ActionResult Index()
         {
             IQueryable<AdData> adDetails = entities.AdDatas;
-            return View(adDetails.ToList());
+
+            ViewData["TotalRecords"] = adDetails.Count();
+            ViewData["RecordPerPage"] = 10;
+            ViewData["CurrentPage"] = 1;
+            ViewData["DisplayPage"] = Math.Ceiling((decimal)adDetails.Count() / 10);
+
+            return View(adDetails.Take(10).ToList());
         }
 
-        public ActionResult fetchData(int? cityId, int? catId, string search = null)
+        //public ActionResult fetchTopThree(int? cityId, int? catId, int currentPage, int recordPerPage, string search = null)
+        //{
+        //    IQueryable<AdData> adDetails = entities.AdDatas;
+
+        //    if (!((cityId == null || cityId == 0) && (catId == null || catId == 0) && (search == null || search == string.Empty)))
+        //    {
+        //        if (!(cityId == null || cityId == 0))
+        //        {
+        //            adDetails = adDetails.Where(cty => cty.City_Id == (int)cityId);
+        //        }
+
+        //        if (!(catId == null || catId == 0))
+        //        {
+        //            adDetails = adDetails.Where(cat => cat.Category_Id == (int)catId);
+        //        }
+
+        //        if (!(search == null || search == string.Empty))
+        //        {
+        //            adDetails = adDetails.Where(srch => srch.Ad_Description.Contains(search));
+        //        }
+
+        //        adDetails = adDetails.OrderBy(ord => ord.Ad_Photo);
+        //    }
+
+        //    adDetails = adDetails.OrderBy(ord => ord.Ad_Photo);
+        //    return PartialView("../Home/_LoadTopThreePartial", adDetails.Take(3).ToList());
+        //}
+
+        public ActionResult fetchData(int? cityId, int? catId, int currentPage, int recordPerPage, string search = null)
         {
-            IQueryable<AdData> adDetails = null;
-            //if (cityId != null || catId != null || search != null)
-            //{
-            //    adDetails = entities.AdDatas;
-            //}
-            //else
-            //{
-            //    var query = "";
-            //    if (cityId != null)
-            //    {
-            //        query = query + "adData.City_Id ==" + cityId + "&&";
-            //    }
-            //    else if (catId != null)
-            //    {
-            //        query = query + "adData.Category_Id ==" + cityId + "&&";
-            //    }
-            //    else if (search != null)
-            //    {
-            //        query = query + "adData.Ad_Descriptio.Contains(" + search + ")";
-            //    }
-            //}
+            IQueryable<AdData> adDetails = entities.AdDatas;
 
-            adDetails = from adData in entities.AdDatas
-                        where (cityId != null ? adData.City_Id == cityId : (catId != null ? adData.Category_Id == catId : adData.Ad_Description.Contains(search)))
-                        select adData;  
+            if (!((cityId == null || cityId == 0) && (catId == null || catId == 0) && (search == null || search == string.Empty)))
+            {
+                if(!(cityId == null || cityId == 0))
+                {
+                    adDetails = adDetails.Where(cty => cty.City_Id == (int)cityId);
+                }
+                
+                if (!(catId == null || catId == 0))
+                {
+                    adDetails = adDetails.Where(cat => cat.Category_Id == (int)catId);
+                }
+                
+                if (!(search == null || search == string.Empty))
+                {
+                    adDetails = adDetails.Where(srch => srch.Ad_Description.Contains(search));
+                }
+            }
 
-            return PartialView("../Home/_LoadDataPartial", adDetails.ToList());
+            ViewData["TotalRecords"] = adDetails.Count();
+            ViewData["RecordPerPage"] = recordPerPage;
+            ViewData["CurrentPage"] = currentPage;
+            ViewData["DisplayPage"] = Math.Ceiling((decimal)adDetails.Count() / recordPerPage);
+           
+            adDetails = adDetails.OrderBy(ord => ord.Ad_Photo);
+            //adDetails.Skip((currentPage - 1) * recordPerPage).Take(recordPerPage);
+            return PartialView("../Home/_LoadDataPartial", adDetails.Skip((currentPage - 1) * recordPerPage).Take(recordPerPage).ToList());
         }
 
         public JsonResult GetCity()

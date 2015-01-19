@@ -1,11 +1,12 @@
-﻿$(document).ready(function () {
+﻿var recordPerPage = 10;
+var currentPage = 1;
+
+$(document).ready(function () {
     debugger;
-    //$("#ddlCity").width("200");
-    //$("#ddlCategory").width("200");
-    //$("#txtSearch").width("300");
     fillCityCombo();
     fillCategoryCombo();
 
+    //main page when clicking on the logo of the website.
     $('#postAd').click(function () {
         window.location.href = "/AdData/Create";
         return false;
@@ -14,57 +15,97 @@
     $("#lstCategories").on('click', 'li', function () {
         var catVal = ($(this).attr("value"));
         $('#ddlCategory').val(catVal);
-        fethData();
+        fethData(currentPage, recordPerPage);
         $("#adCategories").hide();
     });
 
     $("#lstCity").on('click', 'li', function () {
         var cityVal = ($(this).attr("value"));
         $('#ddlCity').val(cityVal);
-        fethData();
+        fethData(currentPage, recordPerPage);
         $("#popularCities").hide();
     });
 
+    $("#topLink li").click(function () {
+        checkHome();
+        var lnkVal = $(this).attr("value");
+        $('#ddlCategory').val(lnkVal);
+        fethData(currentPage, recordPerPage);
+        $("#adCategories").hide();
+    });
+
     $("#ddlCategory").change(function () {
-        fethData();
+        fethData(currentPage, recordPerPage);
     });
 
     $("#ddlCity").change(function () {
-        fethData();
+        fethData(currentPage, recordPerPage);
     });
 
     $("#btnSearch").button().click(function () {
-        fethData();
+        fethData(currentPage, recordPerPage);
     });
-
-    //alert("yes loading");
-    fethData();
 });
 
-$("#ulPagination").click(function () {
-});
+function checkHome()
+{
+    var url = window.location.href;
+    if (url.split("/").length > 3) {
+        if (url.split("/")[3] != "") {
+            if (url.split("/")[3] != "#") {
+                window.location.href = "/";
+            }
+        }
+    }
+};
 
-function fethData()
+function fethData(currentPage, recordPerPage)
 {
     var valCat = $('#ddlCategory').val();
     var valCity = $('#ddlCity').val();
-    var search = $('#txtSearch').val();
-   // alert("cat :" + valCat + "cty :" + valCity + "search:" + search);
+    var search = $('#txtSearch').val();    
 
-    $("#adData").empty();
-    $.get("/Home/fetchData?cityId=" + valCity + "&catId=" +  valCat + "&search=" +search, function (data) {
-        $("#adData").append(data);
+    $("#pageData").empty();
+    $.get("/Home/fetchData?cityId=" + valCity + "&catId=" + valCat + "&currentPage=" + currentPage + "&recordPerPage=" + recordPerPage + "&search=" + search, function (data) {
+        $("#pageData").append(data);
     });
 
-    return false;
+    setFilterCaption();
+
+    $("#ulPagination li").click(function () {
+        var pgVal = $(this).text();
+        $("#ulPagination li.active").removeClass('active');
+        $(this).addClass('active');
+    });
 };
+
+function setFilterCaption()
+{
+    var catTxt = $("#ddlCategory option:selected").text();
+    var ctyTxt = $("#ddlCity option:selected").text();
+    var filterCity = "All India";
+    var filterCategory = "All Category";
+   
+    if (ctyTxt != "")
+    {
+        filterCity = ctyTxt;
+    }
+
+    if (catTxt != "")
+    {
+        filterCategory = catTxt;
+    }
+
+    $("#freeAdFilders").empty();
+    $("#freeAdFilders").text(filterCity + " - " + filterCategory);
+}
 
 function fillCityCombo() {
     if (!$('#ddlCity').val()) {
         $.get("/Home/GetCity", function (data) {
             $("#ddlCity").empty();
             //array to collect cities.
-            $('#ddlCity').append('<option value="0">All</option>');
+            $('#ddlCity').append('<option value="0">All India</option>');
             var items = [];
             $.each(data, function (index, item) {
                 $('#ddlCity').append($('<option>', {
@@ -86,7 +127,7 @@ function fillCategoryCombo() {
         $.get("/Home/GetCategory", function (data) {
             $("#ddlCategory").empty();
             //array to collect categories.
-            $('#ddlCategory').append('<option value="0">All</option>');
+            $('#ddlCategory').append('<option value="0">All Category</option>');
             var items = [];
             $.each(data, function (index, item) {
                 $('#ddlCategory').append($('<option>', {
@@ -101,21 +142,3 @@ function fillCategoryCombo() {
         });
     };
 };
-
-//$(function () {
-//    var selection;
-//    $(".nav nav-pills pull-left").lstCategories({
-//        select: function (event, ui) {
-//            $('.selected', this).removeClass('selected');
-//            // add the css class as well as get the text value of the selection
-//            selection = ui.item.addClass('selected').text();
-//        } // closes select function
-
-//    });
-
-//    $((".nav nav-pills pull-left").lstCategories).on('click', function () {
-//        alert(selection);
-//    }); //closes click()
-//});
-
-

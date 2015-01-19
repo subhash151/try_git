@@ -4,9 +4,11 @@
     ViewBag.Title = "Create";
 }
 
+<script src="~/Scripts/AdData/adData.js"></script>
+
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "AdData", FormMethod.Post, new { enctype = "multipart/form-data" })) 
 {
     @Html.AntiForgeryToken()
     
@@ -18,7 +20,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.User_Id, "User Name", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("User_Id", String.Empty)
+                @*@Html.DropDownList("User_Id", String.Empty)*@
+                @Html.TextBoxFor(model => model.User_Id, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.User_Id)
             </div>
         </div>
@@ -74,7 +77,21 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Ad_Photo, "Ad Image", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Ad_Photo, new { @class = "form-control" })
+                @*@Html.TextBoxFor(model => model.Ad_Photo, new { @class = "form-control" })*@
+                
+                @*@using (Html.BeginForm("UploadFile", "/AdData", FormMethod.Post, new { enctyp = "multipart/form-data" }))
+                { 
+                    <div id="input">
+                        <input type="file" name="file" id="file" />
+                        <input type="button" id="upload" value="upload" />
+                        <asp:FileUpload ID="FileUpload" />
+                        <input type="file" name="dr405" id="dr405" />
+                        <input ="submit" id="btnSubmit" value="Upload" />
+                    </div>
+                }*@
+                
+                <input type="file" name="FileUpload1" /><br />
+
             </div>
         </div>
 

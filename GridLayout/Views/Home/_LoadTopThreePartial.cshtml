@@ -1,0 +1,18 @@
+﻿@model IEnumerable<GridLayout.Models.AdData>
+
+@*partial view for top three ads*@
+@foreach (var item in Model)
+{
+    //(Model) as System.Collections.Generic.List<GridLayout.Models.AdData>)).Items[0];
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <img src=@item.Ad_Photo alt="...">
+            <div class="panel-footer text-center">
+                <h4>@item.Ad_Title</h4>
+                <p>@item.Ad_Description</p>
+                <span class="label label-warning">INR 50000</span>
+            </div>
+        </div>
+    </div>
+}
+

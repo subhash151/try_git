@@ -1,0 +1,28 @@
+﻿@model GridLayout.Models.AdData
+
+@{
+    ViewBag.Title = "Image Upload Page";
+}
+
+@using (Html.BeginForm("", "upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ad_Title, "Ad Title", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Ad_Title, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Ad_Title)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ad_Description, "Ad Description", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Ad_Description, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Ad_Description)
+        </div>
+    </div>
+    
+    <input type="file" name="FileUpload1" /><br />
+    <input type="submit" name="Submit" id="Submit" value="Upload" />
+}
+

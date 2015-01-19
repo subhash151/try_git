@@ -38,6 +38,7 @@ namespace GridLayout.Models
         public virtual DbSet<Locality> Localities { get; set; }
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<SubCategory> SubCategories { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
     }
 }

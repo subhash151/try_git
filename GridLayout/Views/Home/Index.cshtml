@@ -4,9 +4,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<script src="~/Scripts/jQuery.tmpl.min.js"></script>
-<script src="~/Scripts/jQuery.tmpl.js"></script>
-<script src="~/Scripts/jsrender.js"></script>
+<script src="~/Scripts/Shared/jquery.bootpag.min.js"></script>
 
 <div id="popularCities" class="row">
     <br />
@@ -48,63 +46,112 @@
 <div class="row">
     @*left columns for rendering the advertisements*@
     <div class="col-sm-6 col-md-4">
+        <br />
         <div class="thumbnail">
-            <img src="img/game-site-5.jpg" alt="...">
-            <div class="caption">
-                <h3>Latest Release</h3>
-                <p>This is the latest release from our games site. It features the movie lord of the ring and follows the story as close to the movie as possible.</p>
+            @*<img src="img/game-site-5.jpg" alt="...">*@
+            <div class="Adv">
+                <p>
+                    AdON offers free classified ads over all major cities in India. Any user can post an ad at free of cost and search through the free classified on the AdON.
+                </p>
+                <h3>How to Search?</h3>
+                <p>
+                    User can search free classifies Ads by selecting the city and the Ad categories which either can be selected by using the dropdown options or by clicking on the major cities and categories lists from the main page displayed on first load.
+                </p>
+                <p>
+                    Option for filtering the ads using the text search is also available on the page header where user can type the search text and then by pressing the search button all the filter results will be displayed on the page.
+                </p>
+                <br />
+
+                <h3>How to post a free Classified Ad?</h3>
+                <p>
+                    Posting free classified is easy on the AdON. User can click on the “Post Free Ad” button from the top right navigation panel and the user will be redirected to the post Ad form on the AdON.
+                </p>
+                <p>
+                    Users are advised to write detailed descriptions about the Ad for better response along with proper email address and the contact number to receive the prompt communication.
+                </p>
+                <br />
+
             </div>
         </div>
-        <button type="button" class="btn btn-primary text-center" style="width:100%;">99 Items in your cart</button>
     </div>
 
     @*right columns for rendering the ads*@
+    @*<div class="col-sm-6 col-md-8" style="border-left: solid 1px black">*@
     <div class="col-sm-6 col-md-8">
-        <h4>Latest Ads</h4>
-        @*div to rendered the top three ad*@
-        <div id="latestAdContainer" class="row">
-            @for (int i = 0; i < 3; i++)
-            {
-                var item = Model.ToList()[i];
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <img src=@item.Ad_Photo alt="...">
-                        <div class="panel-footer text-center">
-                            <h4>@item.Ad_Title</h4>
-                            <p>@item.Ad_Description</p>
-                            <span class="label label-warning">INR 50000</span>
-                        </div>
-                    </div>
-                </div>
-            }
+        <div class="panel" style="background-size:cover">
+            <h4 id="freeAdFilders">All India - All Category</h4>
         </div>
 
-        <hr />
+        <div id="pageData">
+            @*div to rendered the top three ad*@
+            <div id="topData" class="row">
+                @if (Model.Count() > 0)
+                {
+                    for (int item = 0; item < Model.Count(); item++)
+                    {
+                        var ad = (Model as System.Collections.Generic.List<GridLayout.Models.AdData>)[item];
+                        if (item <= 2)
+                        {
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <img src=@ad.Ad_Photo alt="...">
+                                    <div class="panel-footer text-center">
+                                        <h4>@ad.Ad_Title</h4>
+                                        <p>@ad.Ad_Description</p>
+                                        <span class="label label-warning">INR 50000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+            <hr />
+            <div id="adData">
+                @if (Model.Count() > 0)
+                {
+                    for (int item = 0; item < Model.Count(); item++)
+                    {
+                        var ad = (Model as System.Collections.Generic.List<GridLayout.Models.AdData>)[item];
+                        if (item > 2)
+                        {
+                            @*div to render the ad data*@
+                            <div class="thumbnail">
+                                <div class="media">
+                                    <a href="#" class="pull-left"> <img src=@ad.Ad_Photo alt='' width="150" height="110" class="media-object" /></a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">
+                                            @ad.Ad_Title
+                                        </h4>
+                                        <h5>posted on 00/kk00/2014 by Subhash</h5>
+                                        @ad.Ad_Description
+                                    </div>
+                                </div>
 
-        @*div to render the ad data*@
-        <div id="adData"></div>
+                                <br />
+                            </div>
+                        }
+                    }
+                }
+            </div>
+            <br />
 
-        @*pagination div*@
-        <div class="row text-center">
-            <nav>
-                <ul id="ulPagination" class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li class="active"><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <div id="content"></div>
+            <div id="page-selection" class="row text-center"></div>
+            <script>
+                // init bootpag
+                $('#page-selection').bootpag({
+                    total: @ViewData["DisplayPage"],
+                    page: @ViewData["CurrentPage"],
+                    maxVisible: @ViewData["RecordPerPage"],
+                    href: "#pro-page-{{number}}",
+                    leaps: false,
+                    next: 'Next',
+                    prev: 'Precious'
+                }).on("page", function (event, /* page number here */ num) {
+                    fethData(num, recordPerPage);
+                });
+            </script>
         </div>
     </div>
 </div>

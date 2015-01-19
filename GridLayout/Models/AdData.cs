@@ -16,14 +16,16 @@ namespace GridLayout.Models
     {
         public int Id { get; set; }
         public string User_Id { get; set; }
+        public string UserName { get; set; }
         public int City_Id { get; set; }
-        public int Locality_Id { get; set; }
+        public Nullable<int> Locality_Id { get; set; }
         public int Category_Id { get; set; }
-        public int AdType_Id { get; set; }
+        public Nullable<int> AdType_Id { get; set; }
         public string Ad_Title { get; set; }
         public string Ad_Description { get; set; }
         public string Ad_Photo { get; set; }
         public string Mobile { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
     
         public virtual AdType AdType { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }

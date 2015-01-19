@@ -1,32 +1,75 @@
 ﻿@model IEnumerable<GridLayout.Models.AdData>
 
-@foreach (var ad in Model)
-{
-    //<div class="panel-footer top-left">
-    @*<div class="panel panel-group">
-        <div class="col-md-3">
+<script src="~/Scripts/Shared/jquery.bootpag.min.js"></script>
+
+<div id="pageData">
+    @*div to rendered the top three ad*@
+    <div id="topData" class="row">
+        @if (Model.Count() > 0)
+        {
+            for (int item = 0; item < Model.Count(); item++)
+            {
+                var ad = (Model as System.Collections.Generic.List<GridLayout.Models.AdData>)[item];
+                if (item <= 2)
+                {
+        <div class="col-md-4">
             <div class="thumbnail">
                 <img src=@ad.Ad_Photo alt="...">
-            </div>
-        </div>
-
-        <h3>@ad.Ad_Title</h3>
-        <p>@ad.Ad_Description</p>
-    </div>*@
-
-    <div class="thumbnail">
-            <div class="media">
-                <a href="#" class="pull-left"> <img src=@ad.Ad_Photo alt='' width="150" height="110" class="media-object" /></a>
-                <div class="media-body">
-                    <h4 class="media-heading">
-                        @ad.Ad_Title
-                    </h4>
-                    <h5>posted on 00/00/2014 by Subhash</h5>
-                    @ad.Ad_Description
+                <div class="panel-footer text-center">
+                    <h4>@ad.Ad_Title</h4>
+                    <p>@ad.Ad_Description</p>
+                    <span class="label label-warning">INR 50000</span>
                 </div>
             </div>
         </div>
+                }
+            }
+        }
+    </div>
+    <hr />
+    <div id="adData">
+        @if (Model.Count() > 0)
+        {
+            for (int item = 0; item < Model.Count(); item++)
+            {
+                var ad = (Model as System.Collections.Generic.List<GridLayout.Models.AdData>)[item];
+                if (item > 2)
+                {
+                    @*div to render the ad data*@
+                    <div class="thumbnail">
+                        <div class="media">
+                            <a href="#" class="pull-left"> <img src=@ad.Ad_Photo alt='' width="150" height="110" class="media-object" /></a>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    @ad.Ad_Title
+                                </h4>
+                                <h5>posted on 00/kk00/2014 by Subhash</h5>
+                                @ad.Ad_Description
+                            </div>
+                        </div>
 
-    
+                        <br />
+                    </div>
+                }
+            }
+        }
+    </div>
     <br />
-}
+
+    <div id="content"></div>
+    <div id="page-selection" class="row text-center"></div>
+    <script>
+        // init bootpag
+        $('#page-selection').bootpag({
+            total: @ViewData["DisplayPage"],
+            page: @ViewData["CurrentPage"],
+            maxVisible: @ViewData["RecordPerPage"],
+            href: "#pro-page-{{number}}",
+            leaps: false,
+            next: 'Next',
+            prev: 'Precious'
+        }).on("page", function (event, /* page number here */ num) {
+            fethData(num, recordPerPage);
+        });
+    </script>
+</div>

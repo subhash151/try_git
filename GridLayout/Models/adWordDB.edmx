@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="adWordModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="adWordModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -22,13 +22,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="City_Id" Type="int" Nullable="false" />
-          <Property Name="Locality_Id" Type="int" Nullable="false" />
+          <Property Name="Locality_Id" Type="int" />
           <Property Name="Category_Id" Type="int" Nullable="false" />
-          <Property Name="AdType_Id" Type="int" Nullable="false" />
+          <Property Name="AdType_Id" Type="int" />
           <Property Name="Ad_Title" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Ad_Description" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Ad_Photo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ad_Photo" Type="nvarchar(max)" />
           <Property Name="Mobile" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="date" Type="date" />
         </EntityType>
         <EntityType Name="AdType">
           <Key>
@@ -129,6 +130,16 @@
           <Property Name="SubCategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="UserDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -141,7 +152,7 @@
           <Property Name="Mobile" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <Association Name="FK_AdData_AdType">
-          <End Role="AdType" Type="Self.AdType" Multiplicity="1" />
+          <End Role="AdType" Type="Self.AdType" Multiplicity="0..1" />
           <End Role="AdData" Type="Self.AdData" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AdType">
@@ -319,6 +330,7 @@
           <EntitySet Name="Locality" EntityType="Self.Locality" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetail" EntityType="Self.UserDetail" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AdData_AdType" Association="Self.FK_AdData_AdType">
             <End Role="AdType" EntitySet="AdType" />
@@ -373,55 +385,120 @@
             <End Role="UserDetail" EntitySet="UserDetail" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="adWordModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="adWordEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="adWordModel.C__MigrationHistory" />
+          <EntitySet Name="AdDatas" EntityType="adWordModel.AdData" />
+          <EntitySet Name="AdTypes" EntityType="adWordModel.AdType" />
+          <EntitySet Name="AspNetRoles" EntityType="adWordModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="adWordModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="adWordModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="adWordModel.AspNetUser" />
+          <EntitySet Name="Categories" EntityType="adWordModel.Category" />
+          <EntitySet Name="Cities" EntityType="adWordModel.City" />
+          <EntitySet Name="Countries" EntityType="adWordModel.Country" />
+          <EntitySet Name="Localities" EntityType="adWordModel.Locality" />
+          <EntitySet Name="States" EntityType="adWordModel.State" />
+          <EntitySet Name="SubCategories" EntityType="adWordModel.SubCategory" />
+          <EntitySet Name="sysdiagrams" EntityType="adWordModel.sysdiagram" />
+          <EntitySet Name="UserDetails" EntityType="adWordModel.UserDetail" />
+          <AssociationSet Name="FK_AdData_AdType" Association="adWordModel.FK_AdData_AdType">
+            <End Role="AdType" EntitySet="AdTypes" />
+            <End Role="AdData" EntitySet="AdDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdData_AspNetUsers" Association="adWordModel.FK_AdData_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AdData" EntitySet="AdDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdData_Category" Association="adWordModel.FK_AdData_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="AdData" EntitySet="AdDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdData_City" Association="adWordModel.FK_AdData_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="AdData" EntitySet="AdDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="adWordModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="adWordModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDetail_AspNetUsers" Association="adWordModel.FK_UserDetail_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="UserDetail" EntitySet="UserDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubCategory_Category" Association="adWordModel.FK_SubCategory_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="SubCategory" EntitySet="SubCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_State" Association="adWordModel.FK_City_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Locality_City" Association="adWordModel.FK_Locality_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Locality" EntitySet="Localities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_State_Countries" Association="adWordModel.FK_State_Countries">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="State" EntitySet="States" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="adWordModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
             <PropertyRef Name="ContextKey" />
           </Key>
-          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AdData">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User_Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="City_Id" Type="Int32" Nullable="false" />
-          <Property Name="Locality_Id" Type="Int32" Nullable="false" />
+          <Property Name="Locality_Id" Type="Int32" />
           <Property Name="Category_Id" Type="Int32" Nullable="false" />
-          <Property Name="AdType_Id" Type="Int32" Nullable="false" />
-          <Property Name="Ad_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Ad_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Ad_Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Mobile" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AdType" Relationship="Self.FK_AdData_AdType" FromRole="AdData" ToRole="AdType" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AdData_AspNetUsers" FromRole="AdData" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_AdData_Category" FromRole="AdData" ToRole="Category" />
-          <NavigationProperty Name="City" Relationship="Self.FK_AdData_City" FromRole="AdData" ToRole="City" />
+          <Property Name="AdType_Id" Type="Int32" />
+          <Property Name="Ad_Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ad_Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ad_Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="AdType" Relationship="adWordModel.FK_AdData_AdType" FromRole="AdData" ToRole="AdType" />
+          <NavigationProperty Name="AspNetUser" Relationship="adWordModel.FK_AdData_AspNetUsers" FromRole="AdData" ToRole="AspNetUser" />
+          <NavigationProperty Name="Category" Relationship="adWordModel.FK_AdData_Category" FromRole="AdData" ToRole="Category" />
+          <NavigationProperty Name="City" Relationship="adWordModel.FK_AdData_City" FromRole="AdData" ToRole="City" />
         </EntityType>
         <EntityType Name="AdType">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AdTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AdDatas" Relationship="Self.FK_AdData_AdType" FromRole="AdType" ToRole="AdData" />
+          <Property Name="AdTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AdDatas" Relationship="adWordModel.FK_AdData_AdType" FromRole="AdType" ToRole="AdData" />
         </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="adWordModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
@@ -430,8 +507,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+          <Property Name="User_Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="adWordModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserLogin">
           <Key>
@@ -439,99 +516,109 @@
             <PropertyRef Name="LoginProvider" />
             <PropertyRef Name="ProviderKey" />
           </Key>
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="adWordModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Discriminator" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AdDatas" Relationship="Self.FK_AdData_AspNetUsers" FromRole="AspNetUsers" ToRole="AdData" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetail_AspNetUsers" FromRole="AspNetUsers" ToRole="UserDetail" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AdDatas" Relationship="adWordModel.FK_AdData_AspNetUsers" FromRole="AspNetUser" ToRole="AdData" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="adWordModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="adWordModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="UserDetails" Relationship="adWordModel.FK_UserDetail_AspNetUsers" FromRole="AspNetUser" ToRole="UserDetail" />
+          <NavigationProperty Name="AspNetRoles" Relationship="adWordModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AdDatas" Relationship="Self.FK_AdData_Category" FromRole="Category" ToRole="AdData" />
-          <NavigationProperty Name="SubCategories" Relationship="Self.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AdDatas" Relationship="adWordModel.FK_AdData_Category" FromRole="Category" ToRole="AdData" />
+          <NavigationProperty Name="SubCategories" Relationship="adWordModel.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
         </EntityType>
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CityName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StateID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AdDatas" Relationship="Self.FK_AdData_City" FromRole="City" ToRole="AdData" />
-          <NavigationProperty Name="State" Relationship="Self.FK_City_State" FromRole="City" ToRole="State" />
-          <NavigationProperty Name="Localities" Relationship="Self.FK_Locality_City" FromRole="City" ToRole="Locality" />
+          <NavigationProperty Name="AdDatas" Relationship="adWordModel.FK_AdData_City" FromRole="City" ToRole="AdData" />
+          <NavigationProperty Name="State" Relationship="adWordModel.FK_City_State" FromRole="City" ToRole="State" />
+          <NavigationProperty Name="Localities" Relationship="adWordModel.FK_Locality_City" FromRole="City" ToRole="Locality" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RegionID" Type="Int32" Nullable="false" />
           <Property Name="Logo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="States" Relationship="Self.FK_State_Countries" FromRole="Countries" ToRole="State" />
+          <NavigationProperty Name="States" Relationship="adWordModel.FK_State_Countries" FromRole="Country" ToRole="State" />
         </EntityType>
         <EntityType Name="Locality">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LocalityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LocalityName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CityID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="City" Relationship="Self.FK_Locality_City" FromRole="Locality" ToRole="City" />
+          <NavigationProperty Name="City" Relationship="adWordModel.FK_Locality_City" FromRole="Locality" ToRole="City" />
         </EntityType>
         <EntityType Name="State">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StateName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CountryID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cities" Relationship="Self.FK_City_State" FromRole="State" ToRole="City" />
-          <NavigationProperty Name="Country" Relationship="Self.FK_State_Countries" FromRole="State" ToRole="Countries" />
+          <NavigationProperty Name="Cities" Relationship="adWordModel.FK_City_State" FromRole="State" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="adWordModel.FK_State_Countries" FromRole="State" ToRole="Country" />
         </EntityType>
         <EntityType Name="SubCategory">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SubCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SubCategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
+          <NavigationProperty Name="Category" Relationship="adWordModel.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="UserDetail">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="User_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="User_Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="User_Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Mobile" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserDetail_AspNetUsers" FromRole="UserDetail" ToRole="AspNetUsers" />
+          <Property Name="User_Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="User_Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="User_Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="User_Photo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="adWordModel.FK_UserDetail_AspNetUsers" FromRole="UserDetail" ToRole="AspNetUser" />
         </EntityType>
         <Association Name="FK_AdData_AdType">
-          <End Role="AdType" Type="Self.AdType" Multiplicity="1" />
-          <End Role="AdData" Type="Self.AdData" Multiplicity="*" />
+          <End Type="adWordModel.AdType" Role="AdType" Multiplicity="0..1" />
+          <End Type="adWordModel.AdData" Role="AdData" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AdType">
               <PropertyRef Name="ID" />
@@ -542,10 +629,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AdData_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
-          <End Role="AdData" Type="Self.AdData" Multiplicity="*" />
+          <End Type="adWordModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="adWordModel.AdData" Role="AdData" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="AdData">
@@ -554,8 +641,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AdData_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="AdData" Type="Self.AdData" Multiplicity="*" />
+          <End Type="adWordModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="adWordModel.AdData" Role="AdData" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="ID" />
@@ -566,8 +653,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AdData_City">
-          <End Role="City" Type="Self.City" Multiplicity="1" />
-          <End Role="AdData" Type="Self.AdData" Multiplicity="*" />
+          <End Type="adWordModel.City" Role="City" Multiplicity="1" />
+          <End Type="adWordModel.AdData" Role="AdData" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
               <PropertyRef Name="ID" />
@@ -578,38 +665,38 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+          <End Type="adWordModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <End Type="adWordModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserClaims">
+            <Dependent Role="AspNetUserClaim">
               <PropertyRef Name="User_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+          <End Type="adWordModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <End Type="adWordModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserLogins">
+            <Dependent Role="AspNetUserLogin">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserDetail_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
-          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="*" />
+          <End Type="adWordModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="adWordModel.UserDetail" Role="UserDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UserDetail">
@@ -618,8 +705,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SubCategory_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="*" />
+          <End Type="adWordModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="adWordModel.SubCategory" Role="SubCategory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="ID" />
@@ -630,8 +717,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_City_State">
-          <End Role="State" Type="Self.State" Multiplicity="1" />
-          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <End Type="adWordModel.State" Role="State" Multiplicity="1" />
+          <End Type="adWordModel.City" Role="City" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="State">
               <PropertyRef Name="ID" />
@@ -642,8 +729,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Locality_City">
-          <End Role="City" Type="Self.City" Multiplicity="1" />
-          <End Role="Locality" Type="Self.Locality" Multiplicity="*" />
+          <End Type="adWordModel.City" Role="City" Multiplicity="1" />
+          <End Type="adWordModel.Locality" Role="Locality" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
               <PropertyRef Name="ID" />
@@ -654,10 +741,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_State_Countries">
-          <End Role="Countries" Type="Self.Country" Multiplicity="1" />
-          <End Role="State" Type="Self.State" Multiplicity="*" />
+          <End Type="adWordModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="adWordModel.State" Role="State" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Countries">
+            <Principal Role="Country">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="State">
@@ -666,74 +753,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+          <End Type="adWordModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="adWordModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="adWordEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
-          <EntitySet Name="AdDatas" EntityType="Self.AdData" />
-          <EntitySet Name="AdTypes" EntityType="Self.AdType" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="Cities" EntityType="Self.City" />
-          <EntitySet Name="Countries" EntityType="Self.Country" />
-          <EntitySet Name="Localities" EntityType="Self.Locality" />
-          <EntitySet Name="States" EntityType="Self.State" />
-          <EntitySet Name="SubCategories" EntityType="Self.SubCategory" />
-          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
-          <AssociationSet Name="FK_AdData_AdType" Association="Self.FK_AdData_AdType">
-            <End Role="AdType" EntitySet="AdTypes" />
-            <End Role="AdData" EntitySet="AdDatas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AdData_AspNetUsers" Association="Self.FK_AdData_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AdData" EntitySet="AdDatas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AdData_Category" Association="Self.FK_AdData_Category">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="AdData" EntitySet="AdDatas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AdData_City" Association="Self.FK_AdData_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="AdData" EntitySet="AdDatas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserDetail_AspNetUsers" Association="Self.FK_UserDetail_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="UserDetail" EntitySet="UserDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="SubCategory" EntitySet="SubCategories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_City_State" Association="Self.FK_City_State">
-            <End Role="State" EntitySet="States" />
-            <End Role="City" EntitySet="Cities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Locality_City" Association="Self.FK_Locality_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="Locality" EntitySet="Localities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_State_Countries" Association="Self.FK_State_Countries">
-            <End Role="Countries" EntitySet="Countries" />
-            <End Role="State" EntitySet="States" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -742,147 +765,159 @@
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="adWordModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AdDatas">
             <EntityTypeMapping TypeName="adWordModel.AdData">
               <MappingFragment StoreEntitySet="AdData">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-                <ScalarProperty Name="City_Id" ColumnName="City_Id" />
-                <ScalarProperty Name="Locality_Id" ColumnName="Locality_Id" />
-                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
-                <ScalarProperty Name="AdType_Id" ColumnName="AdType_Id" />
-                <ScalarProperty Name="Ad_Title" ColumnName="Ad_Title" />
-                <ScalarProperty Name="Ad_Description" ColumnName="Ad_Description" />
-                <ScalarProperty Name="Ad_Photo" ColumnName="Ad_Photo" />
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Ad_Photo" ColumnName="Ad_Photo" />
+                <ScalarProperty Name="Ad_Description" ColumnName="Ad_Description" />
+                <ScalarProperty Name="Ad_Title" ColumnName="Ad_Title" />
+                <ScalarProperty Name="AdType_Id" ColumnName="AdType_Id" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="Locality_Id" ColumnName="Locality_Id" />
+                <ScalarProperty Name="City_Id" ColumnName="City_Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AdTypes">
             <EntityTypeMapping TypeName="adWordModel.AdType">
               <MappingFragment StoreEntitySet="AdType">
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="AdTypeName" ColumnName="AdTypeName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="adWordModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
             <EntityTypeMapping TypeName="adWordModel.AspNetUserClaim">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
                 <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
             <EntityTypeMapping TypeName="adWordModel.AspNetUserLogin">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="adWordModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
                 <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="adWordModel.Category">
               <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cities">
             <EntityTypeMapping TypeName="adWordModel.City">
               <MappingFragment StoreEntitySet="City">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="CityName" ColumnName="CityName" />
                 <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="adWordModel.Country">
               <MappingFragment StoreEntitySet="Countries">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
                 <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Localities">
             <EntityTypeMapping TypeName="adWordModel.Locality">
               <MappingFragment StoreEntitySet="Locality">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="LocalityName" ColumnName="LocalityName" />
                 <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="LocalityName" ColumnName="LocalityName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="States">
             <EntityTypeMapping TypeName="adWordModel.State">
               <MappingFragment StoreEntitySet="State">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="StateName" ColumnName="StateName" />
                 <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SubCategories">
             <EntityTypeMapping TypeName="adWordModel.SubCategory">
               <MappingFragment StoreEntitySet="SubCategory">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="adWordModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserDetails">
             <EntityTypeMapping TypeName="adWordModel.UserDetail">
               <MappingFragment StoreEntitySet="UserDetail">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
-                <ScalarProperty Name="User_Address" ColumnName="User_Address" />
-                <ScalarProperty Name="User_Photo" ColumnName="User_Photo" />
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="User_Photo" ColumnName="User_Photo" />
+                <ScalarProperty Name="User_Address" ColumnName="User_Address" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="adWordModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
+            <EndProperty Name="AspNetUser">
               <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
